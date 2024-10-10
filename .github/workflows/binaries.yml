@@ -11,8 +11,21 @@ on:
       - patches/*
       - scripts/*
   pull_request:
-  schedule:
-    - cron:  '0 0 * * 0'  # run each Sunday
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      tags:
+        description: 'Test scenario tags'
+        required: false
+        type: boolean
 
 env:
   ALPINE_BRANCH: v3.18
